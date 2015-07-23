@@ -1,0 +1,30 @@
+{
+  "name": "dy-graphs",
+  "version": "0.0.1",
+  "authors": [
+    "Uemit Seren <uemit.seren@gmail.com>"
+  ],
+  "description": "A Polymer wrapper for dygraphs",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "dygraphs"
+  ],
+  "main": "dy-graphs.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/timeu/dy-graphs/",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "dygraphs": "~1.1.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}

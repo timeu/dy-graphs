@@ -1,0 +1,98 @@
+-->
+<link rel="import" href="../polymer/polymer.html">
+<script src="../dygraphs/dygraph-combined-dev.js"></script>
+
+<!-- A simple Polymer wrapper around Dygraphs (http://dygraphs.com/)
+
+  Example with static parameters:
+
+    <dy-graphs data="data.csv" options='{"legend": "always","title": "MyTitle"}'></dy-graphs>
+
+  Example with data-binding:
+
+    <dy-graphs data="{{data}}" options="{{options}}"></dygraphs>
+
+  Interact with dygraph object directly:
+
+    <dygraphs id="graph"></dygraphs>
+    <script>
+      var g = document.querySelector('#graph');
+      g.dygraph.resetZoom();
+    </script>
+@demo
+-->
+<dom-module id="dy-graphs">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <div id="chart"></div>
+  </template>
+  <script>
+    Polymer({
+
+      is: 'dy-graphs',
+
+      properties: {
+
+        /**
+         * Options for configuring Dygraphs display and beheavior.
+         * For more information, see http://dygraphs.com/options.html
+         */
+        options: {
+          type: Object,
+          observer: '_debouceUpdateOptions'
+        },
+
+        /**
+         * A file containing CSV data or a function that returns this data.
+         * The most basic expected format for each line is "YYYY/MM/DD,val1,val2,...".
+         * For more information, see http://dygraphs.com/data.html.
+         */
+        data: {
+          type: Object,
+          observer: '_debounceUpdateData'
+        }
+      },
+
+      _isReady: false,
+
+      /**
+       * The underlying Dygraphs object.
+       * Use this to access the dygraphs native API.
+       * For more information, see http://dygraphs.com/jsdoc/symbols/Dygraph.html
+       */
+      dygraph : null,
+
+      attached: function() {
+        this.async(function() {
+          this._isReady = true;
+          this.debounce('update',this._createOrUpdate);
+        },1);
+      },
+
+       _debouceUpdateOptions: function(options) {
+          this.debounce('update',this._createOrUpdate);
+       },
+       _debounceUpdateData: function(data) {
+         if (this.dygraph !== null) {
+          this.options = this.options || {};
+          this.options.file = this.data;
+         }
+         this.debounce('update',this._createOrUpdate);
+       },
+      _createOrUpdate: function() {
+        this.cancelDebouncer('update');
+        if (!this._isReady)
+          return;
+        if (this.dygraph !== null) {
+          this.dygraph.updateOptions(this.options);
+        } else if(this.data) {
+          this.dygraph = new Dygraph(this.$.chart,this.data,this.options);
+        }
+      },
+    });
+  </script>
+</dom-module>

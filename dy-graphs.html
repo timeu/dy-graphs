@@ -25,9 +25,18 @@
     :host {
       display: block;
     }
+
+    :host[responsive]{
+      display: flex;
+      flex: 1;
+    }
+
+    #chart[responsive]{
+      flex: 1;
+    }
   </style>
   <template>
-    <div id="chart"></div>
+    <div id="chart" responsive$="{{responsive}}"></div>
   </template>
   <script>
     Polymer({
@@ -35,6 +44,14 @@
       is: 'dy-graphs',
 
       properties: {
+
+        /**
+         * Flag that the chart should behave responsive. If set the host element and the chart container will use flexbox
+         * to fill the available space
+         */
+        responsive: {
+          type: Boolean
+        },
 
         /**
          * Options for configuring Dygraphs display and beheavior.

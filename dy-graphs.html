@@ -1,5 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
-<script src="../dygraphs/dygraph-combined-dev.js"></script>
+<script src="../dygraphs/dygraph-combined.js"></script>
 
 <!-- A simple Polymer wrapper around Dygraphs (http://dygraphs.com/)
 
@@ -20,21 +20,9 @@
     </script>
 @demo
 -->
+
 <dom-module id="dy-graphs">
-  <style>
-    :host {
-      display: block;
-    }
-
-    :host[responsive]{
-      display: flex;
-      flex: 1;
-    }
-
-    #chart[responsive]{
-      flex: 1;
-    }
-  </style>
+  <link rel="import" type="css" href="dy-graphs.css">
   <template>
     <div id="chart" responsive$="{{responsive}}"></div>
   </template>
@@ -100,10 +88,14 @@
          this.debounce('update',this._createOrUpdate);
        },
       _createOrUpdate: function() {
+//        console.log("_createOrUpdate");
         this.cancelDebouncer('update');
         if (!this._isReady)
           return;
         if (this.dygraph !== null) {
+          if (this.data != null){
+            this.options.file = this.data;
+          }
           this.dygraph.updateOptions(this.options);
         } else if(this.data) {
           this.dygraph = new Dygraph(this.$.chart,this.data,this.options);

@@ -34,21 +34,34 @@ Or [download as ZIP](https://github.com/timeu/dy-graphs/archive/master.zip).
 
   Example with static options:
 
-  ```html
-  <dy-graphs data="data.csv" options='{"legend": "always","title": "MyTitle"}'></dy-graphs>
 
+<!--
+```
+<custom-element-demo>
+  <template>
+      <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+      <link rel="import" href="dy-graphs.html">
+      <next-code-block></next-code-block>
+      <script>
+        var data = [];
+        var ele = document.querySelector('dy-graphs');
+        ele.data = data;
+      <script>
+  </template>    
+</custom-element-demo>
+```
+-->
+
+  ```html
+  <dy-graphs data="../demo/data.csv" options='{"legend": "always","title": "MyTitle"}'></dy-graphs>
   ```
 
   Example with data binding
 
-  ```html
-  <template is="dom-bind" id="app">
-    <template>
-      <dy-graphs data="{{data}}" options="{{options}}"></dy-graphs>
-    </template>
-  </template>
 
-  ```
+```html
+    <dy-graphs data="{{data}}" options="{{options}}"></dy-graphs>
+```
 
   Interact with dygraph object directly:
 

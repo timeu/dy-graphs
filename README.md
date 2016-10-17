@@ -35,6 +35,12 @@ Or [download as ZIP](https://github.com/timeu/dy-graphs/archive/master.zip).
   Example with static options:
 
 
+  ```html
+  <dy-graphs data="ny-vs-sf.txt" options='{"legend": "always","title": "MyTitle"}'></dy-graphs>
+  ```
+
+  Example with data binding
+
 <!--
 ```
 <custom-element-demo>
@@ -42,31 +48,32 @@ Or [download as ZIP](https://github.com/timeu/dy-graphs/archive/master.zip).
       <script src="../webcomponentsjs/webcomponents-lite.js"></script>
       <link rel="import" href="dy-graphs.html">
       <next-code-block></next-code-block>
+      <script>
+         var options = {"labels": ['X', 'Est.', 'Actual'],"animatedZooms": true};
+         var data = [];
+         for (var i = 0; i < 1000; i++) {
+             var base = 10 * Math.sin(i / 90.0);
+             data.push([i, base, base + Math.sin(i / 2.0)]);
+         }
+         document.querySelector('dy-graphs').data = data;        
+      </script>
   </template>    
 </custom-element-demo>
 ```
 -->
-
-  ```html
-  <dy-graphs data="../demo/ny-vs-sf.txt" options='{"legend": "always","title": "MyTitle"}'></dy-graphs>
-  ```
-
-  Example with data binding
-
-
 ```html
-    <dy-graphs data="{{data}}" options="{{options}}"></dy-graphs>
+<dy-graphs data="{{data}}" options="{{options}}"></dy-graphs>
 ```
 
   Interact with dygraph object directly:
 
-   ```html
-    <dygraphs id="graph"></dygraphs>
-    <script>
-      var g = document.querySelector('#graph');
-      g.dygraph.resetZoom();
-    </script>
-    ```
+```html
+<dygraphs id="graph"></dygraphs>
+<script>
+  var g = document.querySelector('#graph');
+  g.dygraph.resetZoom();
+</script>
+```
 
 ## Options
 

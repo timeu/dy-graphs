@@ -1,6 +1,5 @@
--->
 <link rel="import" href="../polymer/polymer.html">
-<script src="../dygraphs/dygraph-combined-dev.js"></script>
+<script src="../dygraphs/dygraph-combined.js"></script>
 
 <!-- A simple Polymer wrapper around Dygraphs (http://dygraphs.com/)
 
@@ -21,14 +20,11 @@
     </script>
 @demo
 -->
+
 <dom-module id="dy-graphs">
-  <style>
-    :host {
-      display: block;
-    }
-  </style>
+  <link rel="import" type="css" href="dy-graphs.css">
   <template>
-    <div id="chart"></div>
+    <div id="chart" responsive$="{{responsive}}"></div>
   </template>
   <script>
     Polymer({
@@ -36,6 +32,14 @@
       is: 'dy-graphs',
 
       properties: {
+
+        /**
+         * Flag that the chart should behave responsive. If set the host element and the chart container will use flexbox
+         * to fill the available space
+         */
+        responsive: {
+          type: Boolean
+        },
 
         /**
          * Options for configuring Dygraphs display and beheavior.
@@ -84,10 +88,14 @@
          this.debounce('update',this._createOrUpdate);
        },
       _createOrUpdate: function() {
+//        console.log("_createOrUpdate");
         this.cancelDebouncer('update');
         if (!this._isReady)
           return;
         if (this.dygraph !== null) {
+          if (this.data != null){
+            this.options.file = this.data;
+          }
           this.dygraph.updateOptions(this.options);
         } else if(this.data) {
           this.dygraph = new Dygraph(this.$.chart,this.data,this.options);

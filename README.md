@@ -16,6 +16,34 @@ $ bower install dy-graphs --save
 
 Or [download as ZIP](https://github.com/timeu/dy-graphs/archive/master.zip).
 
+## Simple Demo
+
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="dy-graphs.html">
+    <next-code-block></next-code-block>
+    <script>
+         var options = {"labels": ['X', 'Est.', 'Actual'],"animatedZooms": true};
+         var data = [];
+         for (var i = 0; i < 1000; i++) {
+             var base = 10 * Math.sin(i / 90.0);
+             data.push([i, base, base + Math.sin(i / 2.0)]);
+         }
+         var elem = document.querySelector('dy-graphs');
+         elem.data = data;
+         elem.options = options;  
+      </script>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<dy-graphs></dy-graphs>
+```
+
 ## Usage
 
 1. Import Web Components' polyfill:
@@ -41,30 +69,8 @@ Or [download as ZIP](https://github.com/timeu/dy-graphs/archive/master.zip).
 
   Example with data binding
 
-<!--
-```
-<custom-element-demo>
-  <template>
-      <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-      <link rel="import" href="dy-graphs.html">
-      <dy-graphs></dy-graphs>
-      <script>
-         var options = {"labels": ['X', 'Est.', 'Actual'],"animatedZooms": true};
-         var data = [];
-         for (var i = 0; i < 1000; i++) {
-             var base = 10 * Math.sin(i / 90.0);
-             data.push([i, base, base + Math.sin(i / 2.0)]);
-         }
-         var elem = document.querySelector('dy-graphs');
-         elem.data = data;
-         elem.options = options;  
-      </script>
-  </template>    
-</custom-element-demo>
-```
--->
 ```html
-<dy-graphs data="{{data}}" options="{{options}}"></dy-graphs>
+  <dy-graphs data="{{data}}" options="{{options}}"></dy-graphs>
 ```
 
   Interact with dygraph object directly:

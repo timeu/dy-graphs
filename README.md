@@ -47,7 +47,7 @@ Or [download as ZIP](https://github.com/timeu/dy-graphs/archive/master.zip).
   <template>
       <script src="../webcomponentsjs/webcomponents-lite.js"></script>
       <link rel="import" href="dy-graphs.html">
-      <next-code-block></next-code-block>
+      <dy-graphs></dy-graphs>
       <script>
          var options = {"labels": ['X', 'Est.', 'Actual'],"animatedZooms": true};
          var data = [];
@@ -55,7 +55,9 @@ Or [download as ZIP](https://github.com/timeu/dy-graphs/archive/master.zip).
              var base = 10 * Math.sin(i / 90.0);
              data.push([i, base, base + Math.sin(i / 2.0)]);
          }
-         document.querySelector('dy-graphs').data = data;        
+         var elem = document.querySelector('dy-graphs');
+         elem.data = data;
+         elem.options = options;  
       </script>
   </template>    
 </custom-element-demo>
